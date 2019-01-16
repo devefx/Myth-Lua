@@ -4,6 +4,7 @@
 set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+PROJECT_ROOT="$DIR"/..
 
 # install cocos engin
 if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
@@ -14,7 +15,6 @@ if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
 fi
 
 # copy cocos engin
-python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" DIR "lua"
-echo "copy dir: $DIR"
+python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" PROJECT_ROOT "lua"
 
 echo "before-install.sh execution finished!"
