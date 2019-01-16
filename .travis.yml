@@ -12,7 +12,7 @@ matrix:
           - platform-tools
           - build-tools-25.0.2
           - android-25
-      script:
+      before_script:
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "tools" > /dev/null 2>&1
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-25" > /dev/null 2>&1
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository" > /dev/null 2>&1
