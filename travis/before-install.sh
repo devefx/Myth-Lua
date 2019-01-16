@@ -3,7 +3,7 @@
 # exit this script if any commmand fails
 set -e
 
-WORK_DIR=$(cd "$(dirname "$0")"; pwd)
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # install cocos engin
 if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
@@ -14,7 +14,7 @@ if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
 fi
 
 # copy cocos engin
-python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" WORK_DIR "lua"
+python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" DIR "lua"
 
 
 echo "before-install.sh execution finished!"
