@@ -3,11 +3,7 @@
 import os
 import sys
 import json
-import urllib.request
-import urllib
-import zipfile
 import shutil
-import logging
 
 def add_path_prefix(path_str):
     if not sys.platform == 'win32':
