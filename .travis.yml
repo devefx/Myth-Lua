@@ -1,7 +1,9 @@
 matrix:
   include:
     - os: linux
-      env: BUILD_TARGET=android_cmake
+      env:
+        - BUILD_TARGET=android_cmake
+        - ANDROID_HOME=/usr/local/android-sdk
       language: android
       sudo: true
       android:
@@ -10,10 +12,12 @@ matrix:
           - platform-tools
           - build-tools-25.0.2
           - android-25
-          - extra-android-m2repository
-          - extra-google-m2repository
-          - extra-android-support
-          - extra-google-google_play_services
+      script:
+        - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "tools" > /dev/null 2>&1
+        - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-25" > /dev/null 2>&1
+        - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository" > /dev/null 2>&1
+        - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository" > /dev/null 2>&1
+        - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "ndk-bundle" > /dev/null 2>&1
     - os: osx
       env: BUILD_TARGET=mac_cmake
       language: cpp
