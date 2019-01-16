@@ -15,7 +15,7 @@ if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
 fi
 
 # copy cocos engin
-python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" PROJECT_ROOT "lua"
+python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" $PROJECT_ROOT "lua"
 
 if [ -d "$PROJECT_ROOT/frameworks/runtime-src" ]; then
     echo "exists dir: $PROJECT_ROOT/frameworks/runtime-src"
