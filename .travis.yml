@@ -4,6 +4,16 @@ matrix:
       env: BUILD_TARGET=android_cmake
       language: android
       sudo: true
+      android:
+        components:
+          - tools
+          - platform-tools
+          - build-tools-27.0.3
+          - android-28
+          - extra-android-m2repository
+          - extra-google-m2repository
+          - extra-android-support
+          - extra-google-google_play_services
     - os: osx
       env: BUILD_TARGET=mac_cmake
       language: cpp
