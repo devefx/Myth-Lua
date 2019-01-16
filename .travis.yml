@@ -21,4 +21,7 @@ before_install:
 script:
   - travis/run-script.sh
 
-cache: bundler
+cache: 
+  bundler: true
+  directories:
+    - $HOME/cocos2d-x-3.17.1
