@@ -17,4 +17,10 @@ fi
 # copy cocos engin
 python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" PROJECT_ROOT "lua"
 
+if [ -d "$PROJECT_ROOT/frameworks/cocos2d-x" -a -d "$PROJECT_ROOT/frameworks/runtime-src" ]; then
+    echo "copy cocos engin successed"
+else
+    echo "copy cocos engin failed"
+fi
+
 echo "before-install.sh execution finished!"
