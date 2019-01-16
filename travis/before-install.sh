@@ -17,8 +17,9 @@ fi
 # copy cocos engin
 python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" PROJECT_ROOT "lua"
 
-if [ -d "$PROJECT_ROOT/frameworks/cocos2d-x" ]; then
-    if [ -d "$PROJECT_ROOT/frameworks/runtime-src" ]; then
+if [ -d "$PROJECT_ROOT/frameworks/runtime-src" ]; then
+    echo "exists dir: $PROJECT_ROOT/frameworks/runtime-src"
+    if [ -d "$PROJECT_ROOT/frameworks/cocos2d-x" ]; then
         echo "copy cocos engin successed"
     fi
 else
