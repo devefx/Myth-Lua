@@ -61,6 +61,7 @@ def copy_cocos_x_engin(cocos_x_root, project_dir, lang):
                 if os.path.exists(dstfile):
                     os.remove(dstfile)
                 shutil.copy2(srcfile, dstfile)
+                print("Copy '%s' to '%s'" % (srcfile, dstfile))
     
     print("Copy cocos engine done")
 
