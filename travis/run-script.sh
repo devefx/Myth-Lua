@@ -5,12 +5,32 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+function do_retry()
+{
+	cmd=$@
+	retry_times=5
+	retry_wait=3
+	c=0
+	while [ $c -lt $((retry_times+1)) ]; do
+		c=$((c+1))
+		echo "Executing \"$cmd\", try $c"
+		$cmd && return $?
+		if [ ! $c -eq $retry_times ]; then
+			echo "Command failed, will retry in $retry_wait secs"
+			sleep $retry_wait
+		else
+			echo "Command failed, giving up."
+			return 1
+		fi
+	done
+}
+
 function build_android_ndk-build()
 {
     echo "Building Android ..."
     
     pushd $DIR/frameworks/runtime-src/proj.android
-    ./gradlew assembleRelease -PPROP_BUILD_TYPE=ndk-build --parallel --info
+    do_retry ./gradlew assembleRelease -PPROP_BUILD_TYPE=ndk-build --parallel --info
     popd
 }
 
@@ -39,8 +59,6 @@ function run_pull_request()
 }
 
 # build pull request
-if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-    run_pull_request
-fi
+run_pull_request
 
 echo "run-script.sh execution finished!"
