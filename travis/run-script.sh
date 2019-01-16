@@ -3,7 +3,7 @@
 # exit this script if any commmand fails
 set -e
 
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+WORK_DIR=$(cd "$(dirname "$0")"; pwd)
 
 function do_retry()
 {
@@ -29,7 +29,7 @@ function build_android_ndk-build()
 {
     echo "Building Android ..."
     
-    pushd $DIR/frameworks/runtime-src/proj.android
+    pushd $WORK_DIR/frameworks/runtime-src/proj.android
     do_retry ./gradlew assembleRelease -PPROP_BUILD_TYPE=ndk-build --parallel --info
     popd
 }
@@ -38,7 +38,7 @@ function build_android_cmake()
 {
     echo "Building Android ..."
 
-    pushd $DIR/frameworks/runtime-src/proj.android
+    pushd $WORK_DIR/frameworks/runtime-src/proj.android
     do_retry ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --parallel --info
     popd
 }
