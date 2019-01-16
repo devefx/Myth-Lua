@@ -15,6 +15,6 @@ fi
 
 # copy cocos engin
 python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" DIR "lua"
-
+echo "copy dir: $DIR"
 
 echo "before-install.sh execution finished!"
