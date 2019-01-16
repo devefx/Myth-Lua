@@ -44,6 +44,37 @@ function build_android_cmake()
     popd
 }
 
+function build_mac_cmake()
+{
+    NUM_OF_CORES=`getconf _NPROCESSORS_ONLN`
+
+    cd $PROJECT_ROOT
+    mkdir -p mac_cmake_build
+    cd mac_cmake_build
+    cmake .. -GXcode
+    # cmake --build .
+    xcodebuild -project myth-lua.xcodeproj -alltargets -jobs $NUM_OF_CORES build  | xcpretty
+    #the following commands must not be removed
+    xcodebuild -project myth-lua.xcodeproj -alltargets -jobs $NUM_OF_CORES build
+    exit 0
+}
+
+function build_ios_cmake()
+{
+    NUM_OF_CORES=`getconf _NPROCESSORS_ONLN`
+
+    cd $PROJECT_ROOT
+    mkdir -p ios_cmake_build
+    cd ios_cmake_build
+    cmake .. -DCMAKE_TOOLCHAIN_FILE=$PROJECT_ROOT/frameworks/cocos2d-x/cmake/ios.toolchain.cmake -GXcode -DIOS_PLATFORM=SIMULATOR64
+    # too much logs on console when "cmake --build ."
+    # cmake --build .
+    xcodebuild -project myth-lua.xcodeproj -alltargets -jobs $NUM_OF_CORES  -destination "platform=iOS Simulator,name=iPhone Retina (4-inch)" build  | xcpretty
+    #the following commands must not be removed
+    xcodebuild -project myth-lua.xcodeproj -alltargets -jobs $NUM_OF_CORES  -destination "platform=iOS Simulator,name=iPhone Retina (4-inch)" build
+    exit 0
+}
+
 function run_pull_request()
 {
     echo "Building pull request ..."
@@ -56,6 +87,14 @@ function run_pull_request()
     # android
     if [ $BUILD_TARGET == 'android_cmake' ]; then
         build_android_cmake
+    fi
+
+    if [ $BUILD_TARGET == 'mac_cmake' ]; then
+        build_mac_cmake
+    fi
+
+    if [ $BUILD_TARGET == 'ios_cmake' ]; then
+        build_ios_cmake
     fi
 }
 
