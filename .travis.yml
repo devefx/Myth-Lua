@@ -3,7 +3,7 @@ matrix:
     - os: linux
       env:
         - BUILD_TARGET=android_cmake
-        - ANDROID_HOME=/usr/local/android-sdk
+      #  - ANDROID_HOME=/usr/local/android-sdk
       language: android
       sudo: true
       #android:
