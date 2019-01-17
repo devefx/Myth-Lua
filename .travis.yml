@@ -18,6 +18,8 @@ matrix:
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;android;m2repository" > /dev/null 2>&1
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "extras;google;m2repository" > /dev/null 2>&1
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "ndk-bundle" > /dev/null 2>&1
+      install:
+        - travis_retry sudo apt-get install ninja-build
     - os: osx
       env: BUILD_TARGET=mac_cmake
       language: cpp
