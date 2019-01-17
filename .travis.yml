@@ -20,16 +20,6 @@ matrix:
         - yes | ${ANDROID_HOME}/tools/bin/sdkmanager "ndk-bundle" > /dev/null 2>&1
       install:
         - travis_retry sudo apt-get install ninja-build
-    - os: osx
-      env: BUILD_TARGET=mac_cmake
-      language: cpp
-      osx_image: xcode9.4
-      sudo: true
-    - os: osx
-      env: BUILD_TARGET=ios_cmake
-      language: cpp
-      osx_image: xcode9.4
-      sudo: true
 
 before_install:
   - frameworks/runtime-src/proj.android/app/get_environment.sh

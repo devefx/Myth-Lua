@@ -99,6 +99,6 @@ function run_pull_request()
 }
 
 # build pull request
-run_pull_request
+#run_pull_request
 
 echo "run-script.sh execution finished!"
