@@ -14,16 +14,12 @@ if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
     unzip cocos2d-x-3.17.1.zip -d $HOME > /dev/null 2>&1
 fi
 
+# setup cocos
+python $HOME/cocos2d-x-3.17.1/setup.py
+
 # copy cocos engin
 python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" $PROJECT_ROOT "lua"
 
-if [ -d "$PROJECT_ROOT/frameworks/runtime-src" ]; then
-    echo "exists dir: $PROJECT_ROOT/frameworks/runtime-src"
-    if [ -d "$PROJECT_ROOT/frameworks/cocos2d-x" ]; then
-        echo "copy cocos engin successed"
-    fi
-else
-    echo "copy cocos engin failed"
-fi
+
 
 echo "before-install.sh execution finished!"
