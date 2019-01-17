@@ -24,8 +24,8 @@ matrix:
         #- travis_retry sudo apt-get install ninja-build
 
 before_install:
+  - source ../environment.sh
   - travis/before-install.sh
-  - frameworks/runtime-src/proj.android/app/get_environment.sh
 
 script:
   - travis/run-script.sh
