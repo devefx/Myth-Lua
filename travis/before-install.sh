@@ -20,6 +20,8 @@ function install_cocos2dx()
         rm -rf $COCOS2DX_ROOT
         unzip $COCOS2DX_FILENAME -d $HOME > /dev/null 2>&1
     fi
+
+    python travis/copy_cocos_x.py $COCOS2DX_ROOT $PROJECT_ROOT $PROJECT_LANG
 }
 
 function install_android_ndk()
@@ -36,16 +38,46 @@ function install_android_ndk()
     fi
 }
 
-function append_x_engine()
+function install_linux_environment()
 {
-    python ./travis/copy_cocos_x.py $COCOS2DX_ROOT $PROJECT_ROOT $PROJECT_LANG
+    echo "Installing linux dependence packages ..."
+    echo -e "y" | bash $COCOS2DX_ROOT/build/install-deps-linux.sh
+    echo "Installing linux dependence packages finished!"
+}
+
+function install_python_module_for_osx()
+{
+    pip install PyYAML
+    sudo pip install Cheetah
+}
+
+function install_latest_python()
+{
+    python -V
+    eval "$(pyenv init -)"
+    pyenv install 2.7.14
+    pyenv global 2.7.14
+    python -V
 }
 
 function install_environement()
 {
+    if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+        sudo apt-get update
+        sudo apt-get install ninja-build
+        ninja --version
+        if [ "$BUILD_TARGET" == "linux" ]; then
+            install_linux_environment
+        fi
+    fi
+
+    if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+        install_latest_python
+        install_python_module_for_osx
+    fi
+
     install_cocos2dx
     install_android_ndk
-    append_x_engine
 }
 
 install_environement
