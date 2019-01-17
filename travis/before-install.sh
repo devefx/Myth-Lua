@@ -14,12 +14,20 @@ if [ ! -f "$HOME/cocos2d-x-3.17.1/templates/cocos2dx_files.json" ]; then
     unzip cocos2d-x-3.17.1.zip -d $HOME > /dev/null 2>&1
 fi
 
-# setup cocos
-python $HOME/cocos2d-x-3.17.1/setup.py
+# Add environment variable COCOS_CONSOLE_ROOT for cocos2d-x
+export COCOS_CONSOLE_ROOT=$HOME/cocos2d-x-3.17.1/tools/cocos2d-console/bin
+export PATH=$COCOS_CONSOLE_ROOT:$PATH
+
+# Add environment variable COCOS_X_ROOT for cocos2d-x
+export COCOS_X_ROOT=$HOME/cocos2d-x-3.17.1
+export PATH=$COCOS_X_ROOT:$PATH
+
+# Add environment variable COCOS_TEMPLATES_ROOT for cocos2d-x
+export COCOS_TEMPLATES_ROOT=$HOME/cocos2d-x-3.17.1/templates
+export PATH=$COCOS_TEMPLATES_ROOT:$PATH
 
 # copy cocos engin
 python ./travis/copy_cocos_x.py "$HOME/cocos2d-x-3.17.1" $PROJECT_ROOT "lua"
-
 
 
 echo "before-install.sh execution finished!"
