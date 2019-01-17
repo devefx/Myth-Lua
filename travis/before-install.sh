@@ -6,8 +6,8 @@ set -e
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$DIR"/..
 PROJECT_LANG="lua"
-export COCOS2DX_VERSION="cocos2d-x-3.17.1"
-export COCOS2DX_ROOT=$HOME/$COCOS2DX_VERSION
+#export COCOS2DX_VERSION="cocos2d-x-3.17.1"
+#export COCOS2DX_ROOT=$HOME/$COCOS2DX_VERSION
 COCOS2DX_FILES_JSON=$COCOS2DX_ROOT/templates/cocos2dx_files.json
 COCOS2DX_FILENAME=$COCOS2DX_VERSION".zip"
 COCOS2DX_DOWNLOAD_URL="https://digitalocean.cocos2d-x.org/Cocos2D-X/${COCOS2DX_FILENAME}"
