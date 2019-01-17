@@ -32,7 +32,7 @@ matrix:
       sudo: true
 
 before_install:
-  - runtime-src/proj.android/app/get_environment.sh
+  - frameworks/runtime-src/proj.android/app/get_environment.sh
   - travis/before-install.sh
 
 script:
