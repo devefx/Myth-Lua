@@ -20,7 +20,7 @@ function install_cocos2dx()
         fi
         
         rm -rf $COCOS2DX_ROOT
-        unzip $COCOS2DX_FILENAME -d "${COCOS2DX_ROOT}/.." > /dev/null 2>&1
+        unzip $COCOS2DX_FILENAME -d "./travis_caches" > /dev/null 2>&1
     fi
 
     python travis/copy_cocos_x.py $COCOS2DX_ROOT $PROJECT_ROOT $PROJECT_TYPE
