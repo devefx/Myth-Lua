@@ -66,6 +66,7 @@ function run_building()
     echo "======================================================="
     echo "COCOS2DX_ROOT=${COCOS2DX_ROOT}"
     echo "ANDROID_NDK_HOME=${ANDROID_NDK_HOME}"
+    echo "COCOS_CONSOLE_ROOT=${COCOS_CONSOLE_ROOT}"
     echo "======================================================="
 
     # need to generate binding codes for all targets
