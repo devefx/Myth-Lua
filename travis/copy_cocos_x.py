@@ -15,7 +15,7 @@ def add_path_prefix(path_str):
     ret = ret.replace("/", "\\")
     return ret
 
-def copy_cocos_x_engin(cocos_x_root, project_dir, lang):
+def copy_cocos_x_engin(cocos_x_root, project_dir, project_type):
     dst = os.path.join(project_dir, "frameworks", "cocos2d-x")
     if os.path.exists(dst):
         print("Skip copy engin")
@@ -32,10 +32,10 @@ def copy_cocos_x_engin(cocos_x_root, project_dir, lang):
     f.close()
 
     fileList = data['common']
-    if lang == 'lua':
+    if project_type == 'lua':
         fileList = fileList + data['lua']
 
-    if lang == 'js' and 'js' in data.keys():
+    if project_type == 'js' and 'js' in data.keys():
         fileList = fileList + data['js']
 
     print("Begin copy cocos engine")

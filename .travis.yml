@@ -3,8 +3,8 @@ matrix:
     - os: linux
       env:
         - BUILD_TARGET=android_cmake
-        - COCOS2DX_VERSION=cocos2d-x-3.17.1
-        - COCOS2DX_ROOT=$HOME/cocos2d-x-3.17.1
+      #  - COCOS2DX_VERSION=cocos2d-x-3.17.1
+      #  - COCOS2DX_ROOT=$HOME/cocos2d-x-3.17.1
       #  - ANDROID_HOME=/usr/local/android-sdk
       language: android
       sudo: true
@@ -32,4 +32,4 @@ script:
 cache: 
   bundler: true
   directories:
-    - $HOME/cocos2d-x-3.17.1
+    - ./travis_caches

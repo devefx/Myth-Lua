@@ -5,23 +5,25 @@ set -e
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 PROJECT_ROOT="$DIR"/..
-PROJECT_LANG="lua"
-#export COCOS2DX_VERSION="cocos2d-x-3.17.1"
-#export COCOS2DX_ROOT=$HOME/$COCOS2DX_VERSION
-COCOS2DX_FILES_JSON=$COCOS2DX_ROOT/templates/cocos2dx_files.json
-COCOS2DX_FILENAME=$COCOS2DX_VERSION".zip"
-COCOS2DX_DOWNLOAD_URL="https://digitalocean.cocos2d-x.org/Cocos2D-X/${COCOS2DX_FILENAME}"
 
 function install_cocos2dx()
 {
+    COCOS2DX_FILENAME="${COCOS2DX_VERSION}.zip"
+    COCOS2DX_DOWNLOAD_URL="https://digitalocean.cocos2d-x.org/Cocos2D-X/${COCOS2DX_FILENAME}"
+    COCOS2DX_FILES_JSON="${COCOS2DX_ROOT}/templates/cocos2dx_files.json"
+
     if [ ! -f $COCOS2DX_FILES_JSON ]; then
-        echo "Download ${COCOS2DX_DOWNLOAD_URL}"
-        wget $COCOS2DX_DOWNLOAD_URL
+        # download cocos2d-x
+        if [ ! -f $COCOS2DX_FILENAME ]; then
+            echo "Download ${COCOS2DX_DOWNLOAD_URL}"
+            wget $COCOS2DX_DOWNLOAD_URL
+        fi
+        
         rm -rf $COCOS2DX_ROOT
-        unzip $COCOS2DX_FILENAME -d $HOME > /dev/null 2>&1
+        unzip $COCOS2DX_FILENAME -d "${COCOS2DX_ROOT}/.." > /dev/null 2>&1
     fi
 
-    python travis/copy_cocos_x.py $COCOS2DX_ROOT $PROJECT_ROOT $PROJECT_LANG
+    python travis/copy_cocos_x.py $COCOS2DX_ROOT $PROJECT_ROOT $PROJECT_TYPE
 }
 
 function install_android_ndk()
@@ -62,6 +64,15 @@ function install_latest_python()
 
 function install_environement()
 {
+    python set_environment.py
+    source ../environment.sh
+
+    echo "======================================================="
+    echo "COCOS2DX_VERSION=${COCOS2DX_VERSION}"
+    echo "COCOS2DX_ROOT=${COCOS2DX_ROOT}"
+    echo "PROJECT_TYPE=${PROJECT_TYPE}"
+    echo "======================================================="
+
     if [ "$TRAVIS_OS_NAME" == "linux" ]; then
         sudo apt-get update
         sudo apt-get install ninja-build
