@@ -23,8 +23,6 @@ def export_environment():
     if not os.path.exists(ROOT_DIR):
         os.makedirs(ROOT_DIR)
 
-    print("Write environment to %s" % os.path.join(ROOT_DIR, "environment.sh"))
-
     with open(os.path.join(ROOT_DIR, "environment.sh"), "a") as myfile:
         myfile.write("export COCOS2DX_VERSION=" + engine_version + "\n")
         myfile.write("export COCOS2DX_ROOT=" + cocos2dx_root + "\n")

@@ -65,7 +65,7 @@ function install_latest_python()
 function install_environement()
 {
     python travis/set_environment.py
-    source travis/travis_caches/environment.sh
+    source travis_caches/environment.sh
 
     echo "======================================================="
     echo "COCOS2DX_VERSION=${COCOS2DX_VERSION}"
