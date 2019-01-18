@@ -5,6 +5,7 @@ import json
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 PROJECT_DIR = os.path.abspath(os.path.join(DIR_PATH, ".."))
+ROOT_DIR = os.path.join(PROJECT_DIR, "travis_caches")
 
 def export_environment():
     cocos_project_json = os.path.join(PROJECT_DIR, '.cocos-project.json')
@@ -15,15 +16,16 @@ def export_environment():
     data = json.load(f)
     f.close()
 
-    root_dir = os.path.join(PROJECT_DIR, "travis_caches")
-    if not os.path.exists(root_dir):
-        os.makedirs(root_dir)
-
     engine_version = data['engine_version']
     project_type = data['project_type']
-    cocos2dx_root = os.path.join(root_dir, engine_version)
+    cocos2dx_root = os.path.join(ROOT_DIR, engine_version)
 
-    with open(os.path.join(root_dir, "environment.sh"), "a") as myfile:
+    if not os.path.exists(ROOT_DIR):
+        os.makedirs(ROOT_DIR)
+
+    print("Write environment to %s" % os.path.join(ROOT_DIR, "environment.sh"))
+
+    with open(os.path.join(ROOT_DIR, "environment.sh"), "a") as myfile:
         myfile.write("export COCOS2DX_VERSION=" + engine_version + "\n")
         myfile.write("export COCOS2DX_ROOT=" + cocos2dx_root + "\n")
         myfile.write("export PROJECT_TYPE=" + project_type + "\n")
