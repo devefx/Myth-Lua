@@ -29,7 +29,6 @@ function do_retry()
 function build_android_cmake()
 {
     echo "Building Android ..."
-    source $COCOS2DX_ROOT/../environment.sh
 
     pushd $PROJECT_ROOT/frameworks/runtime-src/proj.android
     do_retry ./gradlew assembleRelease -PPROP_BUILD_TYPE=cmake --parallel --info
@@ -51,8 +50,6 @@ function genernate_binding_codes()
     fi
     which python
 
-    source $COCOS2DX_ROOT/../environment.sh
-
     # Generate binding glue codes
     echo "Create auto-generated luabinding glue codes."
     pushd "$COCOS2DX_ROOT/tools/tolua"
@@ -64,6 +61,13 @@ function run_building()
 {
     echo "Building ..."
 
+    source travis_caches/environment.sh
+
+    echo "======================================================="
+    echo "COCOS2DX_ROOT=${COCOS2DX_ROOT}"
+    echo "ANDROID_NDK_HOME=${ANDROID_NDK_HOME}"
+    echo "======================================================="
+
     # need to generate binding codes for all targets
     genernate_binding_codes
 
@@ -72,8 +76,6 @@ function run_building()
         build_android_cmake
     fi
 }
-
-echo "COCOS2DX_ROOT=${COCOS2DX_ROOT}"
 
 run_building
 
