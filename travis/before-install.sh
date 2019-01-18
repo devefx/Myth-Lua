@@ -64,7 +64,7 @@ function install_latest_python()
 
 function install_environement()
 {
-    python set_environment.py
+    python travis/set_environment.py
     source ../environment.sh
 
     echo "======================================================="
