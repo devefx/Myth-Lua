@@ -80,4 +80,6 @@ function run_building()
 
 run_building
 
+ls -a
+
 echo "run-script.sh execution finished!"
